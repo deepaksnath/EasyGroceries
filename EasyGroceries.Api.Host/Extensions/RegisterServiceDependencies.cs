@@ -8,6 +8,7 @@ using EasyGroceries.Api.Services.Customers;
 using EasyGroceries.Api.Services.Orders;
 using EasyGroceries.Api.Services.Products;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace EasyGroceries.Api.Host.Extensions
 {
@@ -24,6 +25,16 @@ namespace EasyGroceries.Api.Host.Extensions
             var CONNECTION_STRING = builder.Configuration.GetConnectionString("EasyDbConnection");
             builder.Services.AddDbContextPool<EasyDBContext>(
                 options => options.UseSqlServer(CONNECTION_STRING));
+
+            //Logging - Serilog
+            var logger = new LoggerConfiguration()
+                            .ReadFrom.Configuration(builder.Configuration)
+                            .CreateLogger();
+            builder.Logging.AddSerilog(logger);
+            builder.Host.UseSerilog((ctx, conf) =>
+            {
+                conf.ReadFrom.Configuration(ctx.Configuration);
+            });
 
             //Services
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
