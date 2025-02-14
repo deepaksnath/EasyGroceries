@@ -10,5 +10,6 @@ namespace EasyGroceries.Api.Data.Entities
         public decimal TotalAmount { get; set; }
         [NotMapped]
         public bool IsLoyaltyMembershipAdded { get; set; }
+        public Address? Address { get; set; }
     }
 }

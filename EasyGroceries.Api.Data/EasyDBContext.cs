@@ -15,6 +15,7 @@ namespace EasyGroceries.Api.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +32,10 @@ namespace EasyGroceries.Api.Data
                     .HasColumnName("Id")
                     .IsRequired();
             modelBuilder.Entity<OrderItem>()
+                    .Property(s => s.Id)
+                    .HasColumnName("Id")
+                    .IsRequired();
+            modelBuilder.Entity<Address>()
                     .Property(s => s.Id)
                     .HasColumnName("Id")
                     .IsRequired();
