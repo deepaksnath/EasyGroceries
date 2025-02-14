@@ -21,7 +21,7 @@ namespace EasyGroceries.Api.Services.Carts
             return await _cartRepository.GetCartItemsByCustomerAsync(customerId);
         }
 
-        public async Task<CartItem> UpdateCartItem(CartItem cartItem)
+        public async Task<CartItem?> UpdateCartItem(CartItem cartItem)
         {
             return await _cartRepository.UpdateCartItem(cartItem);
         }

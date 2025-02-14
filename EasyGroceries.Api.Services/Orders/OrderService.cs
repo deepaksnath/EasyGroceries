@@ -37,6 +37,7 @@ namespace EasyGroceries.Api.Services.Orders
                             Price = ServiceConstants.LOYALTY_MEMBERSHIP_PRICE,
                             Quantity = 1
                         });
+                        customer.HasLoyaltyMembership = true;
                     }
                     var discount = ServiceConstants.LOYALTY_MEMBER_DISCOUNT;
                     List<OrderItem> orderItems = new();
@@ -71,7 +72,11 @@ namespace EasyGroceries.Api.Services.Orders
                     await _orderRepository.CreateOrderItems(orderItems);
 
                     await _cartRepository.RemoveCartItemsByCustomerAsync(order.CustomerId);
-
+                    
+                    if (order.IsLoyaltyMembershipAdded)
+                    {
+                        await _customerRepository.UpdateCustomer(customer);
+                    }
                     return order;
                 }
             }
