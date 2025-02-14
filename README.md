@@ -7,3 +7,5 @@ Web Api with .Net Core 8, EF and SQL Server.
 3. For using an external database server update the connection string in appSetting.json file in Host project.
 4. Use swagger UI for api interactions using the url: https://localhost:7272/swagger/index.html
 
+**Note :**
+Logging and Unit tests are implemented in ProductController only, this need to be implemented throughout the application.
